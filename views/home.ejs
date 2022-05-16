@@ -8,14 +8,19 @@
 
 <%  posts.forEach(function(post){ %>
 
-<h1><%=post.title%></h1>
+  <h3><%= post.title %></h3>
 <p>
-<%=post.content.substring(0, 200) + " ..."%>
-<a href="/posts/<%=post.title%>">Read More</a>
+  <%= post.content.substring(0, 100) + '...' %>
+  <a href="/posts/<%= post._id %>">Read more</a>
+</p>
+
+<form class="" action="/delete" method="post">
+    <button type="submit" name="button" style="background-color: transparent; border: none; color: white;" value="<%= post._id%>"><i class="fa-solid fa-trash-can"></i></button>
+  </form>
 </p>
 
 
 <% }) %>
-
+<script src="https://kit.fontawesome.com/7b55b4da2f.js" crossorigin="anonymous"></script>
 
 <%- include("partials/footer"); -%>

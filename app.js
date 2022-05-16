@@ -53,18 +53,38 @@ app.post("/compose", function(req, res){
   });
 });
 
-app.get("/posts/:postId", function(req, res){
+app.post("/delete", function(req,res){
 
-const requestedPostId = req.params.postId;
-
-  Post.findOne({_id: requestedPostId}, function(err, post){
-    res.render("post", {
-      title: post.title,
-      content: post.content
+  const idDelete= req.body.button;
+  
+  
+  
+  
+  
+  Post.findByIdAndRemove(idDelete,function(err){
+  
+    if(!err){
+  
+      console.log("successfully deleted");
+  
+    }
+  
+    res.redirect("/");
+  
+  });
+  
+  
+  
+  });
+  app.get('/posts/:postId', function (req, res) {
+    const requestedPostId = req.params.postId;
+    Post.findOne({ _id: requestedPostId }, function (err, post) {
+      res.render('post', {
+        title: post.title,
+        content: post.content,
+      });
     });
   });
-
-});
 
 app.get("/about", function(req, res){
   res.render("about", {aboutContent: aboutContent});
